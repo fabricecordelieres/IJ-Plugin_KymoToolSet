@@ -1,16 +1,16 @@
-KymoToolSet plugin
+#KymoToolSet plugin
 
-# Introduction
+## Introduction
 
-**KymotToolSet **is an **ImageJ plugin** aimed at helping the user with the characterisation of vesicular movements occurring within a cellular process. It is based on kymograph analysis and provides means to correlate tracking parameters to additional quantities such as calcium concentrations. It takes benefit of ImageJ built-in functions to process images and extract data, and relies on the KymoToolBox plugin for kymographs generation and analysis.
+**KymoToolSet** is an **ImageJ plugin** aimed at helping the user with the characterisation of vesicular movements occurring within a cellular process. It is based on kymograph analysis and provides means to correlate tracking parameters to additional quantities such as calcium concentrations. It takes benefit of ImageJ built-in functions to process images and extract data, and relies on the KymoToolBox plugin for kymographs generation and analysis.
 
-# Pre-requisites
+## Pre-requisites
 
-## Having datasets properly formatted
+### Having datasets properly formatted
 
 This plugin ONLY deals with images acquired using the Metamorph software. It is designed to analysed three types of experiments: . For each type, a homemade journal has been generated that handles both devices’ activation and data collection in a normalised way. For each type of experiment, data naming convention is described hereafter:
 
-### Transport and synapses
+#### Transport and synapses
 
 In this type of experiment, two channels are used, one to collect the vesicular transport and one to acquire a structural marker (generally used to locate synapses). The structural marker is only acquired once, at the start of the experiment. To visualise vesicles, bleaching is performed: the region of interest where photomanipulation takes place is recorded.
 
@@ -34,7 +34,7 @@ Cell1: Cell number (from 1 to n, no padding).
 
 488/561/roi: Nature of the data, either the structural marker, the vesicular marker or the bleached roi.
 
-### Transport and GCaMP
+#### Transport and GCaMP
 
 In this type of experiment, two channels are used, one to collect the vesicular transport and one to acquire the GCaMP signal. The automation used for data acquisition takes benefit of Metamorph’s "Multi-Dimensional Acquisition" module. Therefore, on tif file is saved per illumination setting and per timepoint. To visualise vesicles, bleaching is performed: the region of interest where photomanipulation takes place is recorded.
 
@@ -70,7 +70,7 @@ w1Channel1/w2Channel2: Illumination setting for the current channel.
 
 t1: Timepoint (from 1 to n, no padding).
 
-### Transport, GCaMP and uncaging
+#### Transport, GCaMP and uncaging
 
 This type of experiment differs from the previous one in the way an additional  photomanipulation occurs during the experiment. At a predefined timepoint, ROIs corresponding to synapses are subjected to a 405nm laser diode shot, aimed at locally uncaging glutamate. Those regions are user-defined before the full acquisition sequence takes place, and stored for subsequent analysis. Data are stored the same way as described in the previous "Transport and GCaMP" section, an additional ROI being saved according to the following naming convention:
 
@@ -78,11 +78,11 @@ YY-MM-DD_ExperimentName_Condition1_Condition2_Cell1_uncaging.rgn
 
 *The uncaged regions (Metamorph ROI file format).*
 
-## Installing the plugin
+### Installing the plugin
 
 Drag-and-drop the plugin to the ImageJ toolbar: a save-dialog box should pop-up, asking where the plugin should be saved. By default it points at ImageJ installation folder, plugins sub-folder: if so, click on save or navigate to the adequate folder before pressing Ok.
 
-## Installing additional required plugins
+### Installing additional required plugins
 
 The KymoToolset plugin takes benefit of several additional ImageJ plugins that should be installed before using it. 
 
@@ -90,7 +90,7 @@ The KymoToolset plugin takes benefit of several additional ImageJ plugins that s
 
 * **Metamorph Companion**: this plugin is a collection of tools aimed at handling data generated using the Metamorph software. It is used to build stacks for individual images, and to import into ImageJ regions of interest generated using the acquisition software. This plugin is available upon request by contacting its author ([fabrice.cordelieres@gmail.com](mailto:fabrice.cordelieres@gmail.com)).
 
-# Graphical User Interface
+## Graphical User Interface
 
 The toolset is composed of 8 tools. To launch the KymoToolSet, select the "KTS v2" entry within the ImageJ/Plugins menu: the following GUI should now be visible:
 
@@ -98,13 +98,13 @@ The toolset is composed of 8 tools. To launch the KymoToolSet, select the "KTS v
 
 At start, all the options are activated. Once a data-containing folder  has been selected, options may be grayed depending on the type of experiment to be analysed.
 
-## Generate images
+### Generate images
 
-### What does it do ?
+#### What does it do ?
 
 KymoToolSet was designed to handle three types of experiments related to vesicular trafficking. As a consequence, three types of input data are possible. Using this tool, the user is provided with a mean to prepare the data in a normalised way, for the subsequent steps of the analysis.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. The user is requested to point at the **input folder**, which contains the serie of cells to analyze.
 
@@ -196,7 +196,7 @@ Source_folder: Source folder, where original images are stored.
 
 Cell1: Cell number (from 1 to n, no padding).
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Generate images" button.
 
@@ -206,13 +206,13 @@ Cell1: Cell number (from 1 to n, no padding).
 
 4. The process should start: images are automatically generated and saved, the log window reports about the advancement of the processing and contains potential error messages.
 
-## Record paths
+### Record paths
 
-### What does it do ?
+#### What does it do ?
 
 Using this tool, the user will define the directions along which the vesicles are moving. Using the maximum intensity projection over the temporal stack, the trails along which vesicles have been travelling are visible. The user will define those trails, using a unique convention: all ROIs should be drawn from the cell body to the periphery. Once done, kymographs are automatically generated and vesicles’ path saved.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
 
@@ -256,7 +256,7 @@ Source_folder: Source folder, where original images are stored.
 
 Cell1: Cell number (from 1 to n, no padding).
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Record path" button.
 
@@ -268,13 +268,13 @@ Cell1: Cell number (from 1 to n, no padding).
 
 5. Repeat until all cells have been processed: the log window reports about the advancement of the processing and contains potential error messages.
 
-## Record segments/Analyse kymos
+### Record segments/Analyse kymos
 
-### What does it do ?
+#### What does it do ?
 
 This tool collects the positions of the vesicles over the kymograph. The user define those trails, by drawing each of their segments. Once done, tracks are automatically analysed: quality control images and data tables are generated.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
 
@@ -336,7 +336,7 @@ Source_folder: Source folder, where original images are stored.
 
 Cell1: Cell number (from 1 to n, no padding).
 
-### What kind of data are extracted from the kymographs ?
+#### What kind of data are extracted from the kymographs ?
 
 Example of "Data" file: Cell1_data.xls
 
@@ -372,7 +372,7 @@ To make the understanding of the following section easier, we will define the te
 
 NB: some of the measurements are displayed with a value of zero. This is totally normal as the table contains both measurements for single segments (not tagged lines) and others for the full track (tagged with ">>>><<<<"). Percentage of transitions or average speeds can’t be calculated for single segments: in those cases, the zero value is therefore used.
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Record segments/Analyse kymos" button.
 
@@ -386,13 +386,13 @@ NB: some of the measurements are displayed with a value of zero. This is totally
 
 6. Repeat until all cells have been processed: the log window reports about the advancement of the processing and contains potential error messages.
 
-## Analyse flux
+### Analyse flux
 
-### What does it do ?
+#### What does it do ?
 
 This button generates for each cell a table where the number of vesicles is logged for each time point. Additional data are logged: the delta of this number between two consecutive time points and the surface in which those parameters are determined.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
 
@@ -422,7 +422,7 @@ Source_folder: Source folder, where original images are stored.
 
 Cell1: Cell number (from 1 to n, no padding).
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Analyse flux" button.
 
@@ -430,13 +430,13 @@ Cell1: Cell number (from 1 to n, no padding).
 
 3. Click on Ok: the process being fully automated based on existing outputs, no additional user-input is required. No image nor data tables are displayed.The log window reports about the advancement of the processing and contains potential error messages.
 
-## Analyse GCaMP/Marker (only available for "Transport and GCaMP" experiments)
+### Analyse GCaMP/Marker (only available for "Transport and GCaMP" experiments)
 
-### What does it do ?
+#### What does it do ?
 
 This tool allows extracting and correlating GCaMP quantification data to movement-related information (already extracted from the kymographs). It outputs several tables linking the intensities within a dendritic and a **global** synaptic region to individual vesicles’ instant speeds.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
 
@@ -520,7 +520,7 @@ Source_folder: Source folder, where original images are stored.
 
 Cell1: Cell number (from 1 to n, no padding).
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Analyse GCaMP/Marker" button.
 
@@ -530,13 +530,13 @@ Cell1: Cell number (from 1 to n, no padding).
 
 4. Click on Ok: the process being fully automated based on existing outputs, no additional user-input is required. No image nor data tables are displayed.The log window reports about the advancement of the processing and contains potential error messages.
 
-## Analyse GCaMP/Uncaging (only available for "Transport, GCaMP and uncaging" experiments)
+### Analyse GCaMP/Uncaging (only available for "Transport, GCaMP and uncaging" experiments)
 
-### What does it do ?
+#### What does it do ?
 
 This tool allows extracting and correlating GCaMP quantification data to movement-related information (already extracted from the kymographs). It outputs several tables linking the intensities within a dendritic region and **individual** synaptic regions to individual vesicles’ instant speeds.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
 
@@ -634,7 +634,7 @@ Source_folder: Source folder, where original images are stored.
 
 Cell1: Cell number (from 1 to n, no padding).
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Analyse GCaMP/Uncaging" button.
 
@@ -644,13 +644,13 @@ Cell1: Cell number (from 1 to n, no padding).
 
 4. Click on Ok: the process being fully automated based on existing outputs, no additional user-input is required. No image nor data tables are displayed.The log window reports about the advancement of the processing and contains potential error messages.
 
-## Pull data
+### Pull data
 
-### What does it do ?
+#### What does it do ?
 
 This tools allows concatenating tabulation-separated data tables from all cells and saving them into additional files.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
 
@@ -704,7 +704,7 @@ Field:
 
 Source_folder: Source folder, where original images are stored.
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Pull data" button.
 
@@ -712,13 +712,13 @@ Source_folder: Source folder, where original images are stored.
 
 3. Click on Ok: the process being fully automated based on existing outputs, no additional user-input is required. No image nor data tables are displayed.The log window reports about the advancement of the processing and contains potential error messages.
 
-## Re-analyse data on a timeframe
+### Re-analyse data on a timeframe
 
-### What does it do ?
+#### What does it do ?
 
 This tool allows temporal cropping of data: it takes as input parameters a start and an end time point and saves/re-analyse the already analysed data only within this time frame. No data is overwritten: only data copy is used.
 
-### How does it do it (detailed description) ?
+#### How does it do it (detailed description) ?
 
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
 
@@ -774,7 +774,7 @@ End: End time point.
 
 1. Once all cells have been reviewed, the "Pull data" function is called.
 
-### How to use it (short description) ?
+#### How to use it (short description) ?
 
 1. Click on the "Re-analyse data on a timeframe" button.
 

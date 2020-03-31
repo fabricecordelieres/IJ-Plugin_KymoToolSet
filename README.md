@@ -141,10 +141,10 @@ Using this tool, the user will define the directions along which the vesicles ar
 1. Depending on if this button is activated as a first step or a second step during the analysis process, two options are possible:
     1. If activated as a first step, the user is requested to point at the **input folder**, which contains the serie of cells to analyze.
     2. If activated as a second step, the user is asked to confirm the process should continue with the current input folder. If not, the user will have the opportunity to point at a different folder.
-2. Each cell is processed in turn, as follows:
 
 ![Dialog box](img/image_2.jpg)
 
+2. Each cell is processed in turn, as follows:
     1. The user is provided with both the jpg image and the cropped projection composite image, both generated using the "Generate images" tool.
     2. The user is requested to draw the cell process to analyze, starting from the cell body and ending at cell periphery.
     3. Once done, the user should click on Ok. Once Oked, a subfolder is created in the input folder, within the cell folder, named "Kymographs".
@@ -187,10 +187,10 @@ This tool collects the positions of the vesicles over the kymograph. The user de
 3. To optimise the analysis and its outputs, the following parameters can be tweaked:
     1. *Speed limit for pausing*: velocity below which the vesicle is considered to be pausing (in microns/second).
     2. *Line width for display*: width of the lines to be drawn on the annotated kymograph (in pixels).
-4. Each cell is processed in turn, as follows:
 
 ![Dialog box](img/image_4.jpg)
 
+4. Each cell is processed in turn, as follows:
     1. The user is provided with the kymograph: on this composite image, only the vesicles’ channel is activated.
     2. The user is requested to draw each vesicle’s path from top to bottom, then add the corresponding ROI to the ROI Manager by pressing  the ‘t’ key.
     3. Once all relevant vesicles’ paths have been drawn, the user is requested to press on the "Ok" button.
@@ -342,11 +342,9 @@ This tool allows extracting and correlating GCaMP quantification data to movemen
 2. A parameters dialog box is displayed:
 
 ![Dialog box](img/image_8.jpg)
-
-3. The uncaging experiments rely on a serie of acquisitions where a first set of images is acquired: this is the pre-perturbation sequence. In a second step, the uncaging takes place. In a third step, images sequences of images are acquired. Steps 2 and 3 are repeated. The following scheme summarizes the workflow and points out the parameters that are required to be filled by the user:
-
 ![Dialog box](img/image_9.png)
 
+3. The uncaging experiments rely on a serie of acquisitions where a first set of images is acquired: this is the pre-perturbation sequence. In a second step, the uncaging takes place. In a third step, images sequences of images are acquired. Steps 2 and 3 are repeated. The following scheme summarizes the workflow and points out the parameters that are required to be filled by the user:
     1. *Number of pre-perturbation images*: this parameter corresponds to nImagespre.
     2. *Time interval between pre-perturbation sequences*: this parameter corresponds to Δtpre.
     3. *Duration of a single perturbation*: this parameter corresponds to Δtunc.
@@ -406,24 +404,24 @@ This tools allows concatenating tabulation-separated data tables from all cells 
 2. A subfolder is created in the input folder, named "_Pulled_data".
 3. The plugin takes in turn relevant data file for each individual cell, adds the cells number as a tag on a new column placed on the left-most side of the table, and saves the resulting file in the output folder.
 4. Overall the following data structure is adopted:
-        * Movement and flux-related data:
-            * Source_folder/_Pulled_data/Kymo_data.xls
-            * Source_folder/_Pulled_data/Kymo_coord.xls
-            * Source_folder/_Pulled_data/Flux_data.xls
-        * Simple GCaMP-related data (if applicable):
-            * Source_folder/_Pulled_data/GCaMP_data.xls
-            * Source_folder/_Pulled_data/GCaMP_data_correl_speed.xls
-            * Source_folder/_Pulled_data/GCaMP_data_correl_speed_IN.xls
-            * Source_folder/_Pulled_data/GCaMP_data_correl_speed_OUT.xls
-            * Source_folder/_Pulled_data/GCaMP_data_correl_speed_PAUSE.xls
-        * GCaMP and uncaging-related data (if applicable):
-            * Source_folder/_Pulled_data/GCaMP_Uncaging_data.xls
-            * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed.xls
-            * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed_IN.xls
-            * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed_OUT.xls
-            * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed_PAUSE.xls
-            * Source_folder/_Pulled_data/All_in_one.pzfx
-                * *All previous data file crunched into a single, multi-table GraphPad Prism file**.*
+* Movement and flux-related data:
+    * Source_folder/_Pulled_data/Kymo_data.xls
+    * Source_folder/_Pulled_data/Kymo_coord.xls
+    * Source_folder/_Pulled_data/Flux_data.xls
+* Simple GCaMP-related data (if applicable):
+    * Source_folder/_Pulled_data/GCaMP_data.xls
+    * Source_folder/_Pulled_data/GCaMP_data_correl_speed.xls
+    * Source_folder/_Pulled_data/GCaMP_data_correl_speed_IN.xls
+    * Source_folder/_Pulled_data/GCaMP_data_correl_speed_OUT.xls
+    * Source_folder/_Pulled_data/GCaMP_data_correl_speed_PAUSE.xls
+* GCaMP and uncaging-related data (if applicable):
+    * Source_folder/_Pulled_data/GCaMP_Uncaging_data.xls
+    * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed.xls
+    * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed_IN.xls
+    * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed_OUT.xls
+    * Source_folder/_Pulled_data/GCaMP_Uncaging_data_correl_speed_PAUSE.xls
+    * Source_folder/_Pulled_data/All_in_one.pzfx
+* *All previous data file crunched into a single, multi-table GraphPad Prism file**.*
 
 _Field:_
 * Source_folder: Source folder, where original images are stored.

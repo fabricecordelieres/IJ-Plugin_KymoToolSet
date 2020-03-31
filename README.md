@@ -15,16 +15,13 @@ This plugin ONLY deals with images acquired using the Metamorph software. It is 
 In this type of experiment, two channels are used, one to collect the vesicular transport and one to acquire a structural marker (generally used to locate synapses). The structural marker is only acquired once, at the start of the experiment. To visualise vesicles, bleaching is performed: the region of interest where photomanipulation takes place is recorded.
 
 Three files are saved per recorded cell, all cells from an experiment being saved in a single folder:
-
 * Cell1-488.tif: *A single image containing the structural marker.*
 * Cell1-561.tif: *A temporal stack containing the vesicular marker.*
 * Cell1-roi.rgn: *The bleached region (Metamorph ROI file format).*
 
 _Fields:_
-
-Cell1: Cell number (from 1 to n, no padding).
-
-488/561/roi: Nature of the data, either the structural marker, the vesicular marker or the bleached roi.
+* Cell1: Cell number (from 1 to n, no padding).
+* 488/561/roi: Nature of the data, either the structural marker, the vesicular marker or the bleached roi.
 
 #### Transport and GCaMP
 

@@ -16,6 +16,7 @@ In this type of experiment, two channels are used, one to collect the vesicular 
 
 Three files are saved per recorded cell, all cells from an experiment being saved in a single folder:
 
+<span style="color:red;">Cell1</span>-<span style="color:green;">488</span>.tif
 Cell1-488.tif
 
 *A single image containing the structural marker.*

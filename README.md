@@ -65,8 +65,7 @@ The KymoToolset plugin takes benefit of several additional ImageJ plugins that s
 
 The toolset is composed of 8 tools. To launch the KymoToolSet, select the "KTS" entry within the ImageJ/Plugins menu: the following GUI should now be visible:
 
-![image alt text](img/image_0.jpg)
-
+![Dialog box](img/image_0.jpg)
 At start, all the options are activated. Once a data-containing folder  has been selected, options may be grayed depending on the type of experiment to be analysed.
 
 ### Generate images
@@ -80,7 +79,8 @@ KymoToolSet was designed to handle three types of experiments related to vesicul
 1. The user is requested to point at the **input folder**, which contains the serie of cells to analyze.
 2. Based on the presence of specific files (nd files, uncaging ROIs etc…) the experiment’s type is defined and non-relevant buttons unactivated from the interface.
 3. A parameters dialog box is displayed:
-![image alt text](img/image_1.jpg)
+
+![Dialog box](img/image_1.jpg)
 4. To optimise the analysis, the following parameters can be tweaked:
     1. *XY calibration*: physical size of a pixel, in XY (in microns).
     2. *Time interval*: delay between two series of acquisitions (in seconds).
@@ -140,7 +140,8 @@ Using this tool, the user will define the directions along which the vesicles ar
     1. If activated as a first step, the user is requested to point at the **input folder**, which contains the serie of cells to analyze.
     2. If activated as a second step, the user is asked to confirm the process should continue with the current input folder. If not, the user will have the opportunity to point at a different folder.
 2. Each cell is processed in turn, as follows:
-![image alt text](img/image_2.jpg)
+
+![Dialog box](img/image_2.jpg)
     1. The user is provided with both the jpg image and the cropped projection composite image, both generated using the "Generate images" tool.
     2. The user is requested to draw the cell process to analyze, starting from the cell body and ending at cell periphery.
     3. Once done, the user should click on Ok. Once Oked, a subfolder is created in the input folder, within the cell folder, named "Kymographs".
@@ -177,12 +178,14 @@ This tool collects the positions of the vesicles over the kymograph. The user de
     1. If activated as a first step, the user is requested to point at the **input folder**, which contains the serie of cells to analyze.
     2. If activated as a second step, the user is asked to confirm the process should continue with the current input folder. If not, the user will have the opportunity to point at a different folder.
 2. A parameters dialog box is displayed:
-![image alt text](img/image_3.jpg)
+
+![Dialog box](img/image_3.jpg)
 3. To optimise the analysis and its outputs, the following parameters can be tweaked:
     1. *Speed limit for pausing*: velocity below which the vesicle is considered to be pausing (in microns/second).
     2. *Line width for display*: width of the lines to be drawn on the annotated kymograph (in pixels).
 4. Each cell is processed in turn, as follows:
-![image alt text](img/image_4.jpg)
+
+![Dialog box](img/image_4.jpg)
     1. The user is provided with the kymograph: on this composite image, only the vesicles’ channel is activated.
     2. The user is requested to draw each vesicle’s path from top to bottom, then add the corresponding ROI to the ROI Manager by pressing  the ‘t’ key.
     3. Once all relevant vesicles’ paths have been drawn, the user is requested to press on the "Ok" button.
@@ -205,8 +208,7 @@ _Fields:_
 
 Example of "Data" file: Cell1_data.xls
 
-![image alt text](img/image_5.jpg)
-
+![Dialog box](img/image_5.jpg)
 To make the understanding of the following section easier, we will define the term "track" as referring to the full path or user defined selection that describes the movement of one object. A “segment” will be defined as the portion of the track between two changes of state i.e. change of direction and change from the mobile state to a pausing state (or the reverse). It contains the following measurements, expressed using the image’s calibration units:
 
 * *Kymo nb*: number of the track.
@@ -219,7 +221,8 @@ To make the understanding of the following section easier, we will define the te
 * *Min Dist Start-End*: straight distance between the first and the last points of the "track".
 * *Persistence*: Cum Dist/Min Dist Start-End.
 * *Freq XXX>YYY (ex: "Freq In>Out")*: number of transitions from one state (moving outward, moving inward or pausing) to another, per unit of time. It is calculated by counting the number of transitions then dividing it by the total number of timepoints. The following table presents all possible cases, using the color code from the annotated kymographs:
-![image alt text](img/image_6.jpg)
+
+![Dialog box](img/image_6.jpg)
 * Ttl Time: total duration along which the vesicle has been followed.
 * *% Time In, % Time Out, % Time Pause*: number of timepoints where the vesicle is going inward/outward or pausing, divided by the total number of timepoints.
 
@@ -275,7 +278,8 @@ This tool allows extracting and correlating GCaMP quantification data to movemen
     1. If activated as a first step, the user is requested to point at the **input folder**, which contains the serie of cells to analyze.
     2. If activated as a second step, the user is asked to confirm the process should continue with the current input folder. If not, the user will have the opportunity to point at a different folder.
 2. A parameters dialog box is displayed:
-![image alt text](img/image_7.jpg)
+
+![Dialog box](img/image_7.jpg)
 3. To optimise the analysis and its outputs, the following parameter can be tweaked:
     * *Speed limit for pausing*: velocity below which the vesicle is considered to be pausing (in microns/second).
 4. Each cell is processed in turn, as follows:
@@ -328,9 +332,11 @@ This tool allows extracting and correlating GCaMP quantification data to movemen
     1. If activated as a first step, the user is requested to point at the **input folder**, which contains the serie of cells to analyze.
     2. If activated as a second step, the user is asked to confirm the process should continue with the current input folder. If not, the user will have the opportunity to point at a different folder.
 2. A parameters dialog box is displayed:
-![image alt text](img/image_8.jpg)
+
+![Dialog box](img/image_8.jpg)
 3. The uncaging experiments rely on a serie of acquisitions where a first set of images is acquired: this is the pre-perturbation sequence. In a second step, the uncaging takes place. In a third step, images sequences of images are acquired. Steps 2 and 3 are repeated. The following scheme summarizes the workflow and points out the parameters that are required to be filled by the user:
-![image alt text](img/image_9.png)
+
+![Dialog box](img/image_9.png)
     1. *Number of pre-perturbation images*: this parameter corresponds to nImagespre.
     2. *Time interval between pre-perturbation sequences*: this parameter corresponds to Δtpre.
     3. *Duration of a single perturbation*: this parameter corresponds to Δtunc.
@@ -430,7 +436,8 @@ This tool allows temporal cropping of data: it takes as input parameters a start
     1. If activated as a first step, the user is requested to point at the **input folder**, which contains the serie of cells to analyze.
     2. If activated as a second step, the user is asked to confirm the process should continue with the current input folder. If not, the user will have the opportunity to point at a different folder.
 2. A parameters dialog box is displayed:
-![image alt text](img/image_10.jpg)
+
+![Dialog box](img/image_10.jpg)
 3. To optimise the analysis and its outputs, the following parameter can be tweaked:
     1. *Start timepoint*: the first time point to include for re-analysis (inclusive).
     2. *End timepoint*: the last time point to include for re-analysis (inclusive).

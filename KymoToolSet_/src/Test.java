@@ -39,6 +39,5 @@ public class Test {
     	System.getProperties().setProperty("plugins.dir", System.getProperty("user.dir")+File.separator+"bin"+File.separator);
         ImageJ ij=new ImageJ();
         ij.exitWhenQuitting(true);
-        //ImagePlus ip=new ImagePlus("/Users/fab/Desktop/13-12-11 B1 A1/Cell13/Kymos/Data/Images/Cell13_Kymo1-Kymo_Synapses.zip");
     }
 }

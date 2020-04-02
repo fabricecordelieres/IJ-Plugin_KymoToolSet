@@ -90,9 +90,9 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
-		setTitle("KymoToolSet v2 18/05/17");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 288, 263);
+		setTitle("KymoToolSet v4 04/09/19");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 288, 291);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -124,7 +124,7 @@ public class GUI extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnRecordPaths, 0, SpringLayout.EAST, contentPane);
 		contentPane.add(btnRecordPaths);
 		
-		JButton btnRecordSegments = new JButton("Record segments/Analyse kymos");
+		JButton btnRecordSegments = new JButton("Opt. 1: Rec. segments/Analyse kymos");
 		btnRecordSegments.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				recordSegmentsAndAnalyse();
@@ -135,30 +135,44 @@ public class GUI extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnRecordSegments, 0, SpringLayout.EAST, contentPane);
 		contentPane.add(btnRecordSegments);
 		
+		JButton btnKymoButler = new JButton("Opt. 2: Analyse using KymoButler");
+		btnKymoButler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				kymoButlerAnalysis();
+			}
+		});
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnKymoButler, 0, SpringLayout.SOUTH, btnRecordSegments);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnKymoButler, 0, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnKymoButler, 0, SpringLayout.EAST, contentPane);
+		contentPane.add(btnKymoButler);
+		
+		
+		
+		
 		JButton btnAnalyseFlux = new JButton("Analyse flux");
 		btnAnalyseFlux.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				analyseFlux();
 			}
 		});
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnAnalyseFlux, 0, SpringLayout.SOUTH, btnRecordSegments);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnAnalyseFlux, 0, SpringLayout.SOUTH, btnKymoButler);
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnAnalyseFlux, 0, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnAnalyseFlux, 0, SpringLayout.EAST, contentPane);
 		contentPane.add(btnAnalyseFlux);
 		
 		btnAnalyseGcamp = new JButton("Analyse GCaMP/Marker");
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnAnalyseGcamp, 0, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnAnalyseGcamp, 0, SpringLayout.EAST, contentPane);
 		btnAnalyseGcamp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				analyseGCaMP();
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnAnalyseGcamp, 0, SpringLayout.SOUTH, btnAnalyseFlux);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnAnalyseGcamp, 0, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnAnalyseGcamp, 0, SpringLayout.EAST, contentPane);
 		contentPane.add(btnAnalyseGcamp);
 		
 		JButton btnPullData = new JButton("Pull data");
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnPullData, 0, SpringLayout.WEST, btnGenerateImages);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnPullData, 0, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnPullData, 0, SpringLayout.EAST, contentPane);
 		btnPullData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -167,6 +181,8 @@ public class GUI extends JFrame {
 		});
 		
 		btnAnalyseGcampUncaging = new JButton("Analyse GCaMP/Uncaging");
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnAnalyseGcampUncaging, 0, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnAnalyseGcampUncaging, 0, SpringLayout.EAST, contentPane);
 		btnAnalyseGcampUncaging.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				analyseGCaMPUncaging();
@@ -174,20 +190,18 @@ public class GUI extends JFrame {
 		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnAnalyseGcampUncaging, 0, SpringLayout.SOUTH, btnAnalyseGcamp);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnPullData, 0, SpringLayout.SOUTH, btnAnalyseGcampUncaging);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnAnalyseGcampUncaging, 0, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnAnalyseGcampUncaging, 0, SpringLayout.EAST, contentPane);
 		contentPane.add(btnAnalyseGcampUncaging);
 		contentPane.add(btnPullData);
 		
 		JButton btnTimeFrame = new JButton("Re-analyse data on a timeframe");
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnTimeFrame, 0, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnTimeFrame, 0, SpringLayout.EAST, contentPane);
 		btnTimeFrame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				reAnalyseTimeFrame();
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnTimeFrame, 0, SpringLayout.SOUTH, btnPullData);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnTimeFrame, 0, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnTimeFrame, 0, SpringLayout.EAST, btnGenerateImages);
 		contentPane.add(btnTimeFrame);
 	}
 	
@@ -201,14 +215,14 @@ public class GUI extends JFrame {
 			
 			enableButtons();
 			
-			double xyCalibration=Prefs.get("KTSv2_xyCalibration.double", 0.133);
-			double timeCalibration=Prefs.get("KTSv2_timeCalibration.double", 0.1);
-			int nbPreBleach=(int) Prefs.get("KTSv2_nbPreBleach.double", 16);
-			int minWaveletRadius=(int) Prefs.get("KTSv2_minWaveletRadius.double", 2);
-			int maxWaveletRadius=(int) Prefs.get("KTSv2_maxWaveletRadius.double", 5);
-			int topHatRadius=(int) Prefs.get("KTSv2_topHatRadius.double", 4);
-			int vesiculesWavelength=(int) Prefs.get("KTSv2_vesiculesWavelength.double", 561);
-			int secondChannelWavelength=(int) Prefs.get("KTSv2_secondChannelWavelength.double", 491);
+			double xyCalibration=Prefs.get("KTSv4_xyCalibration.double", 0.133);
+			double timeCalibration=Prefs.get("KTSv4_timeCalibration.double", 0.1);
+			int nbPreBleach=(int) Prefs.get("KTSv4_nbPreBleach.double", 16);
+			int minWaveletRadius=(int) Prefs.get("KTSv4_minWaveletRadius.double", 2);
+			int maxWaveletRadius=(int) Prefs.get("KTSv4_maxWaveletRadius.double", 5);
+			int topHatRadius=(int) Prefs.get("KTSv4_topHatRadius.double", 4);
+			int vesiculesWavelength=(int) Prefs.get("KTSv4_vesiculesWavelength.double", 561);
+			int secondChannelWavelength=(int) Prefs.get("KTSv4_secondChannelWavelength.double", 491);
 			
 			if(isUncaging) nbPreBleach=0;
 			
@@ -238,14 +252,14 @@ public class GUI extends JFrame {
 				vesiculesWavelength=(int) gd.getNextNumber();
 				secondChannelWavelength=(int) gd.getNextNumber();
 				
-				Prefs.set("KTSv2_xyCalibration.double", cal.pixelWidth);
-				Prefs.set("KTSv2_timeCalibration.double", cal.frameInterval);
-				Prefs.set("KTSv2_nbPreBleach.double", nbPreBleach);
-				Prefs.set("KTSv2_minWaveletRadius.double", minWaveletRadius);
-				Prefs.set("KTSv2_maxWaveletRadius.double", maxWaveletRadius);
-				Prefs.set("KTSv2_topHatRadius.double", topHatRadius);
-				Prefs.set("KTSv2_vesiculesWavelength.double", vesiculesWavelength);
-				Prefs.set("KTSv2_secondChannelWavelength.double", secondChannelWavelength);
+				Prefs.set("KTSv4_xyCalibration.double", cal.pixelWidth);
+				Prefs.set("KTSv4_timeCalibration.double", cal.frameInterval);
+				Prefs.set("KTSv4_nbPreBleach.double", nbPreBleach);
+				Prefs.set("KTSv4_minWaveletRadius.double", minWaveletRadius);
+				Prefs.set("KTSv4_maxWaveletRadius.double", maxWaveletRadius);
+				Prefs.set("KTSv4_topHatRadius.double", topHatRadius);
+				Prefs.set("KTSv4_vesiculesWavelength.double", vesiculesWavelength);
+				Prefs.set("KTSv4_secondChannelWavelength.double", secondChannelWavelength);
 				
 				
 				imageDataIO io=new imageDataIO(faf.rootPath, ""+vesiculesWavelength, ""+secondChannelWavelength, cal);
@@ -270,7 +284,7 @@ public class GUI extends JFrame {
 			        		isTrp=io.getType(faf.basenames[i])==imageDataIO.TRP_SYNAPSE;
 			        		enableButtons();
 							
-							int nbPreBleach=(int) Prefs.get("KTSv2_nbPreBleach.double", 16);
+							int nbPreBleach=(int) Prefs.get("KTSv4_nbPreBleach.double", 16);
 							io.saveImages(faf.basenames[i], nbPreBleach);
 							
 							if(i==faf.basenames.length-1) log.logInfo("----- Generate images: done -----");
@@ -314,8 +328,8 @@ public class GUI extends JFrame {
 		if(checkFolder() && faf.rootPath!=null && faf.basenames.length>0){
 			enableButtons();
 			
-			double minSpeed=Prefs.get("KTSv2_minSpeed.double", 0.1);
-			int lineWidth=(int) Prefs.get("KTSv2_lineWidth.double", 2);
+			double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
+			int lineWidth=(int) Prefs.get("KTSv4_lineWidth.double", 2);
 			
 			
 			GenericDialog gd=new GenericDialog("Parameters");
@@ -328,8 +342,8 @@ public class GUI extends JFrame {
 				minSpeed=gd.getNextNumber();
 				lineWidth=(int) gd.getNextNumber();
 				
-				Prefs.set("KTSv2_minSpeed.double", minSpeed);
-				Prefs.set("KTSv2_lineWidth.double", lineWidth);
+				Prefs.set("KTSv4_minSpeed.double", minSpeed);
+				Prefs.set("KTSv4_lineWidth.double", lineWidth);
 				
 				log.logInfo("----- Record segments/Analyse kymographs -----");
 				log.logInfo("****** Set Parameters *****");
@@ -345,14 +359,102 @@ public class GUI extends JFrame {
 							log.logInfo("Recording segments and analysing kymographs for "+faf.names[i]+" ("+(i+1)+"/"+faf.names.length+")");
 							enableButtons();
 							
-							double minSpeed=Prefs.get("KTSv2_minSpeed.double", 0.1);
-							int lineWidth=(int) Prefs.get("KTSv2_lineWidth.double", 2);
+							double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
+							int lineWidth=(int) Prefs.get("KTSv4_lineWidth.double", 2);
 							
 							k=new kymographs(faf.rootPath, faf.names[i]);
-							k.getSegments();
+							k.getSegmentsManually();
 							k.analyseKymograph(minSpeed, lineWidth);
 							
 							if(i==faf.names.length-1) log.logInfo("----- Record segments/Analyse kymographs: done -----");
+						}
+			    	}
+				});
+				launch.start();
+			}
+		}
+	}
+	
+	private void kymoButlerAnalysis() {
+		if(checkFolder() && faf.rootPath!=null && faf.basenames.length>0){
+			enableButtons();
+			
+			String URL=Prefs.get("KTSv4_kymoButlerURL.string", "");
+			double threshold=Prefs.get("KTSv4_kymoButlerThreshold.double", 0.2);
+			double minimumSize=Prefs.get("KTSv4_kymoButlerMinSize.double", 3);
+			double minimumFrames=Prefs.get("KTSv4_kymoButlerMinFrames.double", 3);
+			
+			double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
+			int lineWidth=(int) Prefs.get("KTSv4_lineWidth.double", 2);
+			
+			
+			GenericDialog gd=new GenericDialog("Parameters");
+			gd.addMessage("Detection parameters:");
+			gd.addStringField("KymoButler_API_URL", URL);
+			gd.addNumericField("Threshold (default: 0.2)", threshold, 2);
+			gd.addNumericField("Minimum_size (default: 3)", minimumSize, 0);
+			gd.addNumericField("Minimum_frames (default: 3)", minimumFrames, 0);
+			
+			gd.addMessage("");
+			gd.addMessage("");
+			
+			gd.addMessage("Analysis parameters:");
+			gd.addNumericField("Speed limit for pausing (microns/seconds)", minSpeed, 3);
+			gd.addNumericField("Line width for display (pixels)", lineWidth, 0);
+			gd.showDialog();
+			
+			if(gd.wasOKed()){
+				Line.setWidth(2);
+				URL=gd.getNextString();
+				threshold=gd.getNextNumber();
+				minimumSize=gd.getNextNumber();
+				minimumFrames=gd.getNextNumber();
+				
+				minSpeed=gd.getNextNumber();
+				lineWidth=(int) gd.getNextNumber();
+				
+				Prefs.set("KTSv4_kymoButlerURL.string", URL);
+				Prefs.set("KTSv4_kymoButlerThreshold.double", threshold);
+				Prefs.set("KTSv4_kymoButlerMinSize.double", minimumSize);
+				Prefs.set("KTSv4_kymoButlerMinFrames.double", minimumFrames);
+				
+				Prefs.set("KTSv4_minSpeed.double", minSpeed);
+				Prefs.set("KTSv4_lineWidth.double", lineWidth);
+				
+				log.logInfo("----- Record segments/Analyse kymographs -----");
+				log.logInfo("****** Set Parameters *****");
+				log.logInfo("Detection:");
+				log.logInfo("URL: "+URL);
+				log.logInfo("Threshold: "+minimumFrames);
+				log.logInfo("Minimum size: "+threshold);
+				log.logInfo("Minimum frames: "+minimumSize);
+				log.logInfo("Analysis:");
+				log.logInfo("Speed limit for pausing (microns/seconds): "+minSpeed);
+				log.logInfo("Line width for display (pixels): "+lineWidth);
+				log.logInfo("****** Set Parameters *****");
+						
+				Thread launch = new Thread(new Runnable(){
+			        public void run(){
+			        	kymographs k=null;
+			        	
+			        	String URL=Prefs.get("KTSv4_kymoButlerURL.string", "");
+						float threshold=(float) Prefs.get("KTSv4_kymoButlerThreshold.double", 0.2);
+						float minimumSize=(float) Prefs.get("KTSv4_kymoButlerMinSize.double", 3);
+						float minimumFrames=(float) Prefs.get("KTSv4_kymoButlerMinFrames.double", 3);
+						
+						double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
+						int lineWidth=(int) Prefs.get("KTSv4_lineWidth.double", 2);
+						
+						
+						for(int i=0; i<faf.names.length; i++){
+							log.logInfo("Extracting segments using kymoButler and analysing kymographs for "+faf.names[i]+" ("+(i+1)+"/"+faf.names.length+")");
+							enableButtons();
+							
+							k=new kymographs(faf.rootPath, faf.names[i]);
+							k.getSegmentsUsingKymoButler(URL, threshold, minimumSize, minimumFrames);
+							k.analyseKymograph(minSpeed, lineWidth);
+							
+							if(i==faf.names.length-1) log.logInfo("----- Extracting segments using kymoButler and analysing kymographs: done -----");
 						}
 			    	}
 				});
@@ -392,7 +494,7 @@ public class GUI extends JFrame {
 			log.logInfo("----- Analyse GCaMP -----");
 			
 			
-			double minSpeed=Prefs.get("KTSv2_minSpeed.double", 0.1);
+			double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
 			
 			GenericDialog gd=new GenericDialog("Parameters");
 			gd.addNumericField("Speed limit for pausing (microns/seconds)", minSpeed, 3);
@@ -400,7 +502,7 @@ public class GUI extends JFrame {
 			
 			if(gd.wasOKed()){
 				minSpeed=gd.getNextNumber();
-				Prefs.set("KTSv2_minSpeed.double", minSpeed);
+				Prefs.set("KTSv4_minSpeed.double", minSpeed);
 				log.logInfo("****** Set Parameters *****");
 				log.logInfo("Speed limit for pausing (microns/seconds): "+minSpeed);
 				log.logInfo("****** Set Parameters *****");
@@ -412,7 +514,7 @@ public class GUI extends JFrame {
 							log.logInfo("Analysing GCaMP for "+faf.names[i]+" ("+(i+1)+"/"+faf.names.length+")");
 							enableButtons();
 							
-							double minSpeed=Prefs.get("KTSv2_minSpeed.double", 0.1);
+							double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
 							
 							gc=new GCaMP(faf.rootPath, faf.names[i]);
 							gc.exportGCamPData();
@@ -437,14 +539,14 @@ public class GUI extends JFrame {
 
 			log.logInfo("----- Analyse GCaMP Uncaging -----");
 			
-			int nPreImages=(int) Prefs.get("KTSv2_Uncaging_nPreImages.double", 50);
-			double preIntervalle=Prefs.get("KTSv2_Uncaging_preIntervalle.double", 0.426);
-			double perturbationDuration=Prefs.get("KTSv2_Uncaging_perturbationDuration.double", 0.8);
-			int nCycles=(int) Prefs.get("KTSv2_Uncaging_nCycles.double", 10);
-			int nPostImages=(int) Prefs.get("KTSv2_Uncaging_nPostImages.double", 5);
-			double postIntervalle=Prefs.get("KTSv2_Uncaging_postIntervalle.double", 0.426);
+			int nPreImages=(int) Prefs.get("KTSv4_Uncaging_nPreImages.double", 50);
+			double preIntervalle=Prefs.get("KTSv4_Uncaging_preIntervalle.double", 0.426);
+			double perturbationDuration=Prefs.get("KTSv4_Uncaging_perturbationDuration.double", 0.8);
+			int nCycles=(int) Prefs.get("KTSv4_Uncaging_nCycles.double", 10);
+			int nPostImages=(int) Prefs.get("KTSv4_Uncaging_nPostImages.double", 5);
+			double postIntervalle=Prefs.get("KTSv4_Uncaging_postIntervalle.double", 0.426);
 			
-			double minSpeed=Prefs.get("KTSv2_Uncaging_minSpeed.double", 0.1);
+			double minSpeed=Prefs.get("KTSv4_Uncaging_minSpeed.double", 0.1);
 			
 			GenericDialog gd=new GenericDialog("Parameters");
 			gd.addMessage("------ Acquisition Parameters ------");
@@ -468,14 +570,14 @@ public class GUI extends JFrame {
 				postIntervalle=gd.getNextNumber();
 				minSpeed=gd.getNextNumber();
 				
-				Prefs.set("KTSv2_Uncaging_nPreImages.double", nPreImages);
-				Prefs.set("KTSv2_Uncaging_preIntervalle.double", preIntervalle);
-				Prefs.set("KTSv2_Uncaging_perturbationDuration.double", perturbationDuration);
-				Prefs.set("KTSv2_Uncaging_nCycles.double", nCycles);
-				Prefs.set("KTSv2_Uncaging_nPostImages.double", nPostImages);
-				Prefs.set("KTSv2_Uncaging_postIntervalle.double", postIntervalle);
+				Prefs.set("KTSv4_Uncaging_nPreImages.double", nPreImages);
+				Prefs.set("KTSv4_Uncaging_preIntervalle.double", preIntervalle);
+				Prefs.set("KTSv4_Uncaging_perturbationDuration.double", perturbationDuration);
+				Prefs.set("KTSv4_Uncaging_nCycles.double", nCycles);
+				Prefs.set("KTSv4_Uncaging_nPostImages.double", nPostImages);
+				Prefs.set("KTSv4_Uncaging_postIntervalle.double", postIntervalle);
 				
-				Prefs.set("KTSv2_Uncaging_minSpeed.double", minSpeed);
+				Prefs.set("KTSv4_Uncaging_minSpeed.double", minSpeed);
 				
 				log.logInfo("****** Set Parameters *****");
 				log.logInfo(">>>>>> Acquisition Parameters <<<<<<");
@@ -496,14 +598,14 @@ public class GUI extends JFrame {
 							log.logInfo("Analysing GCaMP Uncaging for "+faf.names[i]+" ("+(i+1)+"/"+faf.names.length+")");
 							enableButtons();
 							
-							int nPreImages=(int) Prefs.get("KTSv2_Uncaging_nPreImages.double", 50);
-							double preIntervalle=Prefs.get("KTSv2_Uncaging_preIntervalle.double", 0.426);
-							double perturbationDuration=Prefs.get("KTSv2_Uncaging_perturbationDuration.double", 0.8);
-							int nCycles=(int) Prefs.get("KTSv2_Uncaging_nCycles.double", 10);
-							int nPostImages=(int) Prefs.get("KTSv2_Uncaging_nPostImages.double", 5);
-							double postIntervalle=Prefs.get("KTSv2_Uncaging_postIntervalle.double", 0.426);
+							int nPreImages=(int) Prefs.get("KTSv4_Uncaging_nPreImages.double", 50);
+							double preIntervalle=Prefs.get("KTSv4_Uncaging_preIntervalle.double", 0.426);
+							double perturbationDuration=Prefs.get("KTSv4_Uncaging_perturbationDuration.double", 0.8);
+							int nCycles=(int) Prefs.get("KTSv4_Uncaging_nCycles.double", 10);
+							int nPostImages=(int) Prefs.get("KTSv4_Uncaging_nPostImages.double", 5);
+							double postIntervalle=Prefs.get("KTSv4_Uncaging_postIntervalle.double", 0.426);
 							
-							double minSpeed=Prefs.get("KTSv2_Uncaging_minSpeed.double", 0.1);
+							double minSpeed=Prefs.get("KTSv4_Uncaging_minSpeed.double", 0.1);
 							
 							
 							double[] params=new double[]{nPreImages, preIntervalle, perturbationDuration, nCycles, nPostImages, postIntervalle};
@@ -550,11 +652,11 @@ public class GUI extends JFrame {
 
 			log.logInfo("----- Re-analyse data on a timeframe -----");
 			
-			int startTimePoint=(int) Prefs.get("KTSv2_ReAnalyse_startTimePoint.double", 0);
-			int endTimePoint=(int) Prefs.get("KTSv2_ReAnalyse_endTimePoint.double", 50);
+			int startTimePoint=(int) Prefs.get("KTSv4_ReAnalyse_startTimePoint.double", 0);
+			int endTimePoint=(int) Prefs.get("KTSv4_ReAnalyse_endTimePoint.double", 50);
 			
-			double minSpeed=Prefs.get("KTSv2_minSpeed.double", 0.1);
-			int lineWidth=(int) Prefs.get("KTSv2_lineWidth.double", 2);
+			double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
+			int lineWidth=(int) Prefs.get("KTSv4_lineWidth.double", 2);
 			
 			faf.setName(faf.names[0]);
 			
@@ -576,11 +678,11 @@ public class GUI extends JFrame {
 				minSpeed=gd.getNextNumber();
 				lineWidth=(int) gd.getNextNumber();
 				
-				Prefs.set("KTSv2_ReAnalyse_startTimePoint.double", startTimePoint);
-				Prefs.set("KTSv2_ReAnalyse_endTimePoint.double", endTimePoint);
+				Prefs.set("KTSv4_ReAnalyse_startTimePoint.double", startTimePoint);
+				Prefs.set("KTSv4_ReAnalyse_endTimePoint.double", endTimePoint);
 				
-				Prefs.set("KTSv2_minSpeed.double", minSpeed);
-				Prefs.set("KTSv2_lineWidth.double", lineWidth);
+				Prefs.set("KTSv4_minSpeed.double", minSpeed);
+				Prefs.set("KTSv4_lineWidth.double", lineWidth);
 				
 				
 				log.logInfo("****** Set Parameters *****");
@@ -606,8 +708,8 @@ public class GUI extends JFrame {
 			        	for(int i=0; i<faf.names.length; i++){
 							enableButtons();
 							
-							int startTimePoint=(int) Prefs.get("KTSv2_ReAnalyse_startTimePoint.double", 0);
-							int endTimePoint=(int) Prefs.get("KTSv2_ReAnalyse_endTimePoint.double", 50);
+							int startTimePoint=(int) Prefs.get("KTSv4_ReAnalyse_startTimePoint.double", 0);
+							int endTimePoint=(int) Prefs.get("KTSv4_ReAnalyse_endTimePoint.double", 50);
 							
 							//Keep track of folders
 							fafOut=new filesAndFolders(faf.rootPath+"Re-Analysis_"+startTimePoint+"-"+endTimePoint+File.separator);
@@ -650,8 +752,8 @@ public class GUI extends JFrame {
 							
 							//Analyse kymographs
 							log.logInfo("Re-analysing kymographs from "+faf.names[i]+" ("+(i+1)+"/"+faf.names.length+")");
-							double minSpeed=Prefs.get("KTSv2_minSpeed.double", 0.1);
-							int lineWidth=(int) Prefs.get("KTSv2_lineWidth.double", 2);
+							double minSpeed=Prefs.get("KTSv4_minSpeed.double", 0.1);
+							int lineWidth=(int) Prefs.get("KTSv4_lineWidth.double", 2);
 							
 							k=new kymographs(fafOut.rootPath, faf.names[i]);
 							k.analyseKymograph(minSpeed, lineWidth);

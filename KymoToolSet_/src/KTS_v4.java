@@ -3,10 +3,10 @@ import ij.IJ;
 import ij.plugin.PlugIn;
 
 /**
-  * test.java v1, 1 août 2016
+  * KTS_v4.java v1, 19 août 2019
     Fabrice P Cordelieres, fabrice.cordelieres at gmail.com
     
-    Copyright (C) 2016 Fabrice P. Cordelieres
+    Copyright (C) 2019 Fabrice P. Cordelieres
   
     License:
     This program is free software; you can redistribute it and/or modify
@@ -27,7 +27,7 @@ import ij.plugin.PlugIn;
  * @author Fabrice P Cordelieres
  *
  */
-public class KTS_v2 implements PlugIn{
+public class KTS_v4 implements PlugIn{
 
 	/* (non-Javadoc)
 	 * @see ij.plugin.PlugIn#run(java.lang.String)
@@ -39,10 +39,12 @@ public class KTS_v2 implements PlugIn{
 		
 		//Check for plugins and run
 		Class<?> kymoToolBox=null;
+		Class<?> kymoButler=null;
 		Class<?> MMCompanion=null;
 		
 		try {
 			kymoToolBox = Class.forName("Analyse_Kymo");
+			kymoButler = Class.forName("KymoButler_");
 			MMCompanion = Class.forName("plugins.ndFile.buildNdStack");
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -53,9 +55,10 @@ public class KTS_v2 implements PlugIn{
 			new GUI().setVisible(true);
 		}else{
 			String message="Please install first the following plugin(s):\n";
-			if(kymoToolBox==null) message+="KymoToolBox";
-			if(kymoToolBox==null && MMCompanion==null) message+=" and ";
-			if(MMCompanion==null) message+="MMCompanion";
+			if(kymoToolBox==null) message+="\n- KymoToolBox";
+			if(kymoButler==null) message+="\n- KymoButler";
+			if(MMCompanion==null) message+="\n- MMCompanion";
+			
 			IJ.error(message);
 		}
 	}

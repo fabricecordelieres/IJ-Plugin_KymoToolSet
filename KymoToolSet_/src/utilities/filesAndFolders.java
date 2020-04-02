@@ -22,6 +22,7 @@ package utilities;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Arrays;
 
 import ij.io.OpenDialog;
 
@@ -252,6 +253,8 @@ public class filesAndFolders {
 				//if(basenames[i].indexOf("_cell")!=-1) basenames[i]=basenames[i].replaceAll(".rgn", ".nd");
 				if(!allRois[i].endsWith("_uncaging.rgn")) basenames[index++]=allRois[i].replaceAll(".rgn", ".nd");;
 			}
+			
+			Arrays.sort(basenames);
 		}
 	}
 	
@@ -267,6 +270,7 @@ public class filesAndFolders {
 				}
 			};
 			names=new File(rootPath).list(ff);
+			Arrays.sort(names);
 		}
 	}
 	

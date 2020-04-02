@@ -23,12 +23,15 @@ package analysis;
 import java.awt.Color;
 import java.io.File;
 
+import KymoButler.KymoButlerIO;
+import KymoButler.KymoButlerResponseParser;
 import Utilities.kymograph.analyseKymo;
 import Utilities.kymograph.buildLUT;
 import Utilities.kymograph.kymograph;
 import ij.CompositeImage;
 import ij.IJ;
 import ij.ImagePlus;
+import ij.Prefs;
 import ij.gui.Roi;
 import ij.gui.WaitForUserDialog;
 import ij.io.FileSaver;
@@ -158,7 +161,7 @@ public class kymographs {
 	/**
 	 * Interacts with the user to get the segments along which the vesicules are moving
 	 */
-	public void getSegments(){
+	public void getSegmentsManually(){
 		if(new File(faf.kymoPath_kymo).exists()){
 			RoiManager rm=RoiManager.getInstance();
 			if(rm==null){
@@ -181,6 +184,58 @@ public class kymographs {
 					+ "add in turn each path to the ROI Manager by pressing 't',\n"
 					+ "then click on Ok");
 			wfud.show();
+			
+			if(rm.getCount()>0){
+				//Saves the segments
+				rm.runCommand("Save", faf.kymoPath_segments);
+				rm.reset();
+			}
+			
+			kymograph.close();
+			System.gc();
+		}
+	}
+	
+	/**
+	 * Automatically get the segments along which the vesicules are moving using KymoButler
+	 * @param URL KymoButler API URL, as a String
+	 * @param threshold detection threshold for segments, as a float
+	 * @param minimumSize minimum number of overall traveled pixels to consider the segment, as a float
+	 * @param minimumFrames minimum number of frames composing the segment to consider it, as a float
+	 */
+	public void getSegmentsUsingKymoButler(String URL, float threshold, float minimumSize, float minimumFrames){
+		if(new File(faf.kymoPath_kymo).exists()){
+			RoiManager rm=RoiManager.getRoiManager();
+			rm.reset();
+			
+			ImagePlus kymograph=new CompositeImage(new ImagePlus(faf.kymoPath_kymo));
+			kymograph.setC(1);
+			
+			kymograph=new ImagePlus("Kymograph", kymograph.getChannelProcessor());
+			kymograph.resetDisplayRange();
+			
+			KymoButlerIO kbio=new KymoButlerIO();
+			kbio.setKymograph(kymograph);
+			kbio.setURL(URL);
+			kbio.setThreshold(threshold);
+			kbio.setMinimumSize(minimumSize);
+			kbio.setMinimumFrames(minimumFrames);
+			
+			String response=kbio.getAnalysisResults();
+			
+			boolean debug=Prefs.get("KymoButler_debug.boolean", false); //Check the debug box in KymoButler4IJ to activate saving the JSON files
+			
+			if(response==null) {
+				IJ.log("Process cancelled, either by server or by user");
+			}else {
+				if(KymoButlerResponseParser.isJSON(response)){
+					KymoButlerResponseParser pkr=new KymoButlerResponseParser(response);
+					pkr.pushRoisToRoiManager(true);
+				}else {
+					IJ.log("The response doesn't seem to be properly formatted");
+				}
+				if(debug) kbio.saveAnalysisResults(faf.kymoPath+faf.name+"_KymoButler.JSON");
+			}
 			
 			if(rm.getCount()>0){
 				//Saves the segments
